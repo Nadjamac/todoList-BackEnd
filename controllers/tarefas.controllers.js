@@ -15,7 +15,7 @@ class TarefasController {
     const id = req.params.id;
 
     if(!mongoose.Types.ObjectId.isValid(id)) {
-      res.status(403).send('Id Invalido');
+      res.status(403).send({message: 'Id Invalido'});
       return;
     }
 
@@ -23,16 +23,16 @@ class TarefasController {
 
     // tratamento de erro se existe a vaga ou nao no banco de dados.
     if(!tarefaObj) {
-      res.status(404).send('tarefa não encontrada');
+      res.status(404).send({message: 'tarefa não encontrada'});
       return
     }
 
     res.status(200).send(tarefa);
   }
 
-  createtarefa = async (req,res) => {
+  createTarefa = async (req,res) => {
     const tarefa = req.body;
-    const tarefaSalva = await tarefaService.createTarefa(tarefa)
+    const tarefaSalvar = await tarefasService.createTarefa(tarefa)
     .then(() => {
       res.send({ message: `tarefa criada com sucesso` });
     })
@@ -51,7 +51,7 @@ class TarefasController {
 
   deleteTarefa = async (req, res) => {
     const id = req.params.id;
-    await tarefaService.deleteTarefa(id)
+    await tarefasService.deleteTarefa(id)
     .then(() => res.status(200).send({message: 'Excluido com sucesso'}));
   }
 }

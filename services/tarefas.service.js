@@ -1,10 +1,7 @@
-// importo o model
-const tarefa = require('../models/tarefa');
+const Tarefa = require('../models/tarefa');
 
-// Retorna todas as vagas
 class TarefaService {
-  // conecta com o modelo e retorna a lista de vagas
-  findAll = async () => await tarefa.find();
+  findAll = async () => await Tarefa.find();
   
   findById = async (id) => {
     return await Tarefa.findById(id);
@@ -23,6 +20,4 @@ class TarefaService {
   }
 
 }
-
-
 module.exports = TarefaService;

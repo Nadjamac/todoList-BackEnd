@@ -1,13 +1,17 @@
-// importar o mongoose
+
 const mongoose = require('mongoose');
-// url de conexao = mongodb://servidor:porta/banco
-const Conn = () => {
-  mongoose.connect('mongodb://localhost:27017/tarefas', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log('MongoDB conectado'))
-  .catch((err) => console.log('Erro no mongo', err))
+
+function conn(url, user, pass, banco){
+    mongoose.connect(`${url}/${banco}`, {
+        user: user,
+        pass: pass,
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    }).then(() => {
+        console.log('Base de dados conectada com sucesso!!');
+    }).catch((err) => {
+        console.error(err);
+    });
 }
 
-module.exports = Conn;
+module.exports = conn;
